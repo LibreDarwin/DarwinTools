@@ -22,6 +22,7 @@
 		FEEDFACE0000000000000054 /* SystemVersion.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = SystemVersion.plist; sourceTree = "<group>"; };
 		FEEDFACE0000000000000061 /* CoreFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreFoundation.framework; path = System/Library/Frameworks/CoreFoundation.framework; sourceTree = SDKROOT; };
 		FEEDFACE0000000000000062 /* libcfprivate.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; path = libcfprivate.tbd; sourceTree = "<group>"; };
+		FEEDFACE0000000000000063 /* sw_vers.1 */ = {isa = PBXFileReference; lastKnownFileType = man; name = sw_vers.1; path = man/sw_vers.1; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -48,6 +49,7 @@
 			isa = PBXGroup;
 			children = (
 				FEEDFACE0000000000000004 /* src */,
+				FEEDFACE0000000000000008 /* man */,
 				FEEDFACE0000000000000009 /* Frameworks */,
 				FEEDFACE0000000000000003 /* Products */,
 			);
@@ -80,6 +82,14 @@
 				FEEDFACE0000000000000062 /* libcfprivate.tbd */,
 			);
 			path = sw_vers;
+			sourceTree = "<group>";
+		};
+		FEEDFACE0000000000000008 /* man */ = {
+			isa = PBXGroup;
+			children = (
+				FEEDFACE0000000000000063 /* sw_vers.1 */,
+			);
+			path = man;
 			sourceTree = "<group>";
 		};
 		FEEDFACE0000000000000006 /* startupfiletool */ = {

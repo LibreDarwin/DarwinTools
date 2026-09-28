@@ -1,0 +1,127 @@
+.Dd September 28, 2026
+.Dt SW_VERS 1
+.Os Darwin
+.Sh NAME
+.Nm sw_vers
+.Nd print system version information
+.Sh SYNOPSIS
+.Nm
+.Op Fl n | Fl v | Fl e | Fl b | Fl i | Fl x | Fl r
+.Nm
+.Op Fl P Ar plist
+.Sh DESCRIPTION
+.Nm
+prints the product name, product version and build version of the running
+system, one per line.
+.Pp
+Given a single option, only the requested field is printed, without a label.
+.Pp
+The values come from the supplemental system version dictionary maintained by
+CoreFoundation.
+With
+.Fl P ,
+they are instead read from the property list at
+.Ar plist ,
+which is useful for inspecting a system version file other than the one
+currently installed..Sh OPTIONS
+.Bl -tag -width Ds
+.It Fl n , Fl -productName
+Print the product name, for example
+.Dq macOS .
+The long option is also accepted as
+.Fl -ProductName
+and
+.Fl -productname .
+.It Fl v , Fl -productVersion
+Print the product version, for example
+.Dq 26.5.2 .
+The long option is also accepted as
+.Fl -ProductVersion
+and
+.Fl -productversion .
+.It Fl e , Fl -productVersionExtra
+Print the product version extra, the suffix that distinguishes one release
+from another within the same product version.
+Nothing is printed if the system does not record one.
+The long option is also accepted as
+.Fl -ProductVersionExtra
+and
+.Fl -productversionextra .
+.It Fl b , Fl -buildVersion
+Print the build version, for example
+.Dq 25F84 .
+The long option is also accepted as
+.Fl -BuildVersion
+and
+.Fl -buildversion .
+.It Fl i , Fl -buildID
+Print the build identifier, a unique identifier for the installed system.
+The long option is also accepted as
+.Fl -BuildID
+and
+.Fl -buildid .
+.It Fl x , Fl -XBSVersion
+Print the Xcode build version.
+The long option is also accepted as
+.Fl -xbsversion .
+This field is no longer recorded by current systems, so nothing is printed.
+.It Fl r , Fl -releaseType
+Print the release type, for example
+.Dq Beta .
+The long option is also accepted as
+.Fl -ReleaseType
+and
+.Fl -releasetype .
+.It Fl P Ar plist , Fl -plist Ar plist
+Read the version information from the property list at
+.Ar plist
+instead of from the running system.
+.It Fl h , Fl -help
+Print a usage message and exit.
+.El
+.Sh EXIT STATUS
+.Ex -std
+It exits with status 0 on success.
+.Pp
+It exits with status 1 if an option is unrecognized or missing its argument,
+if the system version information cannot be loaded, or if the property list
+named by
+.Fl P
+cannot be read.
+.Sh EXAMPLES
+Show the full version report:
+.Bd -literal -offset indent
+sw_vers
+.Ed
+.Pp
+Print just the build version:
+.Bd -literal -offset indent
+sw_vers -buildVersion
+.Ed
+.Pp
+Read a system version plist that is not the installed one:
+.Bd -literal -offset indent
+sw_vers -plist /path/to/SystemVersion.plist
+.Ed
+.Sh DIAGNOSTICS
+An error is reported on the standard error output if the system version
+information is missing or malformed, or if
+.Fl P
+names a file that cannot be read as a property list.
+.Sh SEE ALSO
+.Xr plutil 1
+.Sh HISTORY
+The
+.Nm
+command first appeared in NeXTSTEP.
+.Pp
+The
+.Fl e ,
+.Fl i ,
+.Fl r
+and
+.Fl x
+options, the
+.Fl P
+option, and the capitalised and all-lowercase spellings of the long
+options appeared in Mac OS X 10.13.

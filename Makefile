@@ -42,9 +42,11 @@ $(SW_VERS): $(SW_VERS_OBJS)
 # declared, but CFPriv.h is not in the SDK.  cfpriv.h declares them by hand and
 # libcfprivate.tbd tells the linker they exist in the real CoreFoundation; both
 # live next to the source.
+# CFURLCreateDataAndPropertiesFromResource is deprecated but is still what
+# the real sw_vers uses to read a plist off disk, so silence the warning.
 $(OBJDIR)/sw_vers.o: src/sw_vers/sw_vers.c src/sw_vers/cfpriv.h
 	@mkdir -p $(OBJDIR)
-	$(CC) $(CFLAGS) -c -o $@ src/sw_vers/sw_vers.c
+	$(CC) $(CFLAGS) -Wno-deprecated-declarations -c -o $@ src/sw_vers/sw_vers.c
 
 $(SFT): $(SFT_OBJS)
 	@mkdir -p $(BUILD_DIR)
@@ -58,9 +60,11 @@ $(OBJDIR)/startupfiletool.o: src/startupfiletool/startupfiletool.c
 	$(CC) $(CFLAGS) -c -o $@ src/startupfiletool/startupfiletool.c
 
 install: all
-	install -d $(DESTDIR)$(PREFIX)/bin $(DESTDIR)$(PREFIX)/sbin
+	install -d $(DESTDIR)$(PREFIX)/bin $(DESTDIR)$(PREFIX)/sbin \
+	    $(DESTDIR)$(PREFIX)/share/man/man1
 	install -m 0755 $(SW_VERS) $(DESTDIR)$(PREFIX)/bin/sw_vers
 	install -m 0755 $(SFT) $(DESTDIR)$(PREFIX)/sbin/startupfiletool
+	install -m 0444 man/sw_vers.1 $(DESTDIR)$(PREFIX)/share/man/man1/sw_vers.1
 	install -d $(DESTDIR)/System/Library/CoreServices
 	install -m 0644 src/SystemVersion.plist $(DESTDIR)/System/Library/CoreServices/SystemVersion.plist
 

@@ -12,11 +12,11 @@
 
 #include <CoreFoundation/CoreFoundation.h>
 
-CF_EXPORT CFDictionaryRef _CFCopySystemVersionDictionary(void);
-CF_EXPORT CFDictionaryRef _CFCopyServerVersionDictionary(void);
+CF_EXPORT CFDictionaryRef _CFCopySupplementalVersionDictionary(void);
 
 CF_EXPORT const CFStringRef _kCFSystemVersionProductNameKey;
 CF_EXPORT const CFStringRef _kCFSystemVersionProductVersionKey;
+CF_EXPORT const CFStringRef _kCFSystemVersionProductVersionExtraKey;
 CF_EXPORT const CFStringRef _kCFSystemVersionBuildVersionKey;
 
 #endif /* SW_VERS_CFPRIV_H */

@@ -3,7 +3,7 @@
     "compatibility_versions" : [ {"version" : "150"} ],
     "current_versions" : [ {"version" : "5026.5.4"} ],
     "exported_symbols" : [ {
-      "text" : { "global" : [ "__CFConstantStringClassReference", "__CFCopyServerVersionDictionary", "__CFCopySystemVersionDictionary", "__kCFSystemVersionBuildVersionKey", "__kCFSystemVersionProductNameKey", "__kCFSystemVersionProductVersionKey" ] }
+      "text" : { "global" : [ "__CFConstantStringClassReference", "__CFCopySupplementalVersionDictionary", "__kCFSystemVersionBuildVersionKey", "__kCFSystemVersionProductNameKey", "__kCFSystemVersionProductVersionExtraKey", "__kCFSystemVersionProductVersionKey" ] }
     } ],
     "flags" : [ {"attributes" : ["not_app_extension_safe"]} ],
     "install_names" : [ {"name" : "/System/Library/Frameworks/CoreFoundation.framework/Versions/A/CoreFoundation"} ],
