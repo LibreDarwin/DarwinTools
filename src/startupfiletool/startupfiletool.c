@@ -77,6 +77,7 @@ int writeStartupFile(char *device, char *filedata)
   uint32_t allocationBlockSize = 0;
   uint32_t totalBlocks = 0;
   uint64_t logicalSize = 0;
+  uint64_t blocks64 = 0;
   uint32_t deviceBlockSize = 0;
   uint64_t deviceBlockCount = 0;
   char *datapayload = NULL;
@@ -84,7 +85,8 @@ int writeStartupFile(char *device, char *filedata)
   char buffer[kSectorSize];
   HFSPlusVolumeHeader *vh = (HFSPlusVolumeHeader *)buffer;
   uint32_t allocatedBlocks = 0, allocatedStart = 0;
-  ssize_t iobytes;
+  size_t iobytes;
+  size_t dataSize;
 
   fd = opendev(device, O_RDWR, 0, NULL);
   if(fd < 0)
@@ -139,8 +141,17 @@ int writeStartupFile(char *device, char *filedata)
   if(ret)
     err(1, "fstat(%s)", filedata);
 
-  logicalSize = sb.st_size;
-  totalBlocks = (logicalSize + allocationBlockSize - 1)/allocationBlockSize;
+  if(sb.st_size < 0)
+    errx(1, "%s: negative size", filedata);
+  logicalSize = (uint64_t)sb.st_size;
+  blocks64 = (logicalSize + allocationBlockSize - 1)/allocationBlockSize;
+  /* A fork's block count is 32-bit on disk.  Truncating it silently would
+     under-allocate, and the payload write below would then run past the
+     blocks we reserved and clobber whatever follows. */
+  if(blocks64 > UINT32_MAX)
+    errx(1, "%s: %llu blocks exceeds the 32-bit fork limit", filedata,
+	 (unsigned long long)blocks64);
+  totalBlocks = (uint32_t)blocks64;
 
   ret = allocateBlocks(fd, &vh->allocationFile, 
 		       allocationBlockSize, totalBlocks,
@@ -170,20 +181,28 @@ int writeStartupFile(char *device, char *filedata)
     err(1, "pwrite HFS+ VH");
 
   bytesWritten = pwrite(fd, buffer, sizeof(buffer),
-			((uint64_t)deviceBlockSize) * deviceBlockCount - 2*kSectorSize);
-  if(bytesWritten != sizeof(buffer))
+			(off_t)(((uint64_t)deviceBlockSize) * deviceBlockCount - 2*kSectorSize));
+  if(bytesWritten != (ssize_t)sizeof(buffer))
     err(1, "pwrite HFS+ Alt-VH");
 
 
-  iobytes = ((size_t)sb.st_size + allocationBlockSize-1)/allocationBlockSize*allocationBlockSize;
-  datapayload = malloc(iobytes);
-  if(read(datafd, datapayload, (size_t)sb.st_size) != (size_t)sb.st_size)
-    err(1, "short read of datafd");
+  dataSize = (size_t)sb.st_size;
+  iobytes = (dataSize + allocationBlockSize-1)/allocationBlockSize*allocationBlockSize;
+  /* An empty file rounds to zero bytes to copy; malloc(0) may return NULL,
+     which must not be mistaken for an allocation failure. */
+  if(iobytes > 0) {
+    datapayload = malloc(iobytes);
+    if(datapayload == NULL)
+      err(1, "malloc(%zu)", iobytes);
+    /* read() returns ssize_t; compare against a signed copy of the size. */
+    if(read(datafd, datapayload, dataSize) != (ssize_t)dataSize)
+      err(1, "short read of datafd");
 
-  if(pwrite(fd, datapayload, iobytes, ((off_t)allocatedStart)*((off_t)allocationBlockSize)) != iobytes)
-    err(1, "short write of payload");
+    if(pwrite(fd, datapayload, iobytes, ((off_t)allocatedStart)*((off_t)allocationBlockSize)) != (ssize_t)iobytes)
+      err(1, "short write of payload");
 
-  free(datapayload);
+    free(datapayload);
+  }
 
   ret = close(datafd);
   if(ret)
@@ -228,9 +247,11 @@ int allocateBlocks(int fd, HFSPlusForkData *allocationFile,
 
   for(j=0; j < bitmapFork.totalBlocks; j++) {
     ssize_t readBytes, writeBytes;
-    int contigWordsEmpty = 0;
+    uint32_t contigWordsEmpty = 0;
     uint32_t *ptr;
-    int k;
+    /* Word indices and counts, all unsigned, so they compare cleanly against
+       the uint32_t quantities they are checked against. */
+    uint32_t k, wordsInBlock, startk, endk;
     int foundit = 0;
     off_t readOffset = mapForkOffset(&bitmapFork,
 				     allocationBlockSize,
@@ -241,18 +262,19 @@ int allocateBlocks(int fd, HFSPlusForkData *allocationFile,
       err(1, "pread(%d,%qu)", allocationBlockSize, readOffset);
 
     ptr = (uint32_t *)buffer;
-    for(k=0; k < allocationBlockSize/sizeof(uint32_t); k++) {
+    wordsInBlock = allocationBlockSize/sizeof(uint32_t);
+    for(k=0; k < wordsInBlock; k++) {
       if(ptr[k] == 0x0) {
 	contigWordsEmpty++;
 	if(contigWordsEmpty == allocationWords) {
 	  // got it
-	  int startk = k + 1 - contigWordsEmpty;
-	  int endk = k;
+	  startk = k + 1 - contigWordsEmpty;
+	  endk = k;
 	  *allocatedBlocks = contigWordsEmpty*32;
 	  *allocatedStart = j*allocationBlockSize*8
 	    + startk*32;
 	  for(; startk <= endk; startk++) {
-	    printf("Marking word %d\n", startk);
+	    printf("Marking word %u\n", startk);
 	    ptr[startk] = 0xFFFFFFFF;
 	  }
 	  foundit = 1;
