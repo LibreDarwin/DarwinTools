@@ -28,7 +28,7 @@
  */
 
 #include <CoreFoundation/CoreFoundation.h>
-#include <CoreFoundation/CFPriv.h>
+#include "cfpriv.h"
 
 void usage(char *progname) {
 	fprintf(stderr, "Usage: %s [-productName|-productVersion|-buildVersion]\n", progname);

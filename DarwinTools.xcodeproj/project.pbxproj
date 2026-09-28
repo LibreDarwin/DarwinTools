@@ -1,0 +1,324 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 56;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		FEEDFACE0000000000000021 /* sw_vers.c in Sources */ = {isa = PBXBuildFile; fileRef = FEEDFACE0000000000000051 /* sw_vers.c */; };
+		FEEDFACE0000000000000022 /* startupfiletool.c in Sources */ = {isa = PBXBuildFile; fileRef = FEEDFACE0000000000000052 /* startupfiletool.c */; };
+		FEEDFACE0000000000000031 /* CoreFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FEEDFACE0000000000000061 /* CoreFoundation.framework */; };
+		FEEDFACE0000000000000032 /* libcfprivate.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = FEEDFACE0000000000000062 /* libcfprivate.tbd */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		FEEDFACE0000000000000041 /* sw_vers */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = sw_vers; sourceTree = BUILT_PRODUCTS_DIR; };
+		FEEDFACE0000000000000042 /* startupfiletool */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = startupfiletool; sourceTree = BUILT_PRODUCTS_DIR; };
+		FEEDFACE0000000000000051 /* sw_vers.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = sw_vers.c; sourceTree = "<group>"; };
+		FEEDFACE0000000000000052 /* startupfiletool.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = startupfiletool.c; sourceTree = "<group>"; };
+		FEEDFACE0000000000000053 /* cfpriv.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = cfpriv.h; sourceTree = "<group>"; };
+		FEEDFACE0000000000000054 /* SystemVersion.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = SystemVersion.plist; sourceTree = "<group>"; };
+		FEEDFACE0000000000000061 /* CoreFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreFoundation.framework; path = System/Library/Frameworks/CoreFoundation.framework; sourceTree = SDKROOT; };
+		FEEDFACE0000000000000062 /* libcfprivate.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; path = libcfprivate.tbd; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		FEEDFACE0000000000000082 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				FEEDFACE0000000000000031 /* CoreFoundation.framework in Frameworks */,
+				FEEDFACE0000000000000032 /* libcfprivate.tbd in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		FEEDFACE0000000000000083 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		FEEDFACE0000000000000002 = {
+			isa = PBXGroup;
+			children = (
+				FEEDFACE0000000000000004 /* src */,
+				FEEDFACE0000000000000009 /* Frameworks */,
+				FEEDFACE0000000000000003 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		FEEDFACE0000000000000003 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				FEEDFACE0000000000000041 /* sw_vers */,
+				FEEDFACE0000000000000042 /* startupfiletool */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		FEEDFACE0000000000000004 /* src */ = {
+			isa = PBXGroup;
+			children = (
+				FEEDFACE0000000000000005 /* sw_vers */,
+				FEEDFACE0000000000000006 /* startupfiletool */,
+				FEEDFACE0000000000000007 /* SystemVersion.plist */,
+			);
+			path = src;
+			sourceTree = "<group>";
+		};
+		FEEDFACE0000000000000005 /* sw_vers */ = {
+			isa = PBXGroup;
+			children = (
+				FEEDFACE0000000000000051 /* sw_vers.c */,
+				FEEDFACE0000000000000053 /* cfpriv.h */,
+				FEEDFACE0000000000000062 /* libcfprivate.tbd */,
+			);
+			path = sw_vers;
+			sourceTree = "<group>";
+		};
+		FEEDFACE0000000000000006 /* startupfiletool */ = {
+			isa = PBXGroup;
+			children = (
+				FEEDFACE0000000000000052 /* startupfiletool.c */,
+			);
+			path = startupfiletool;
+			sourceTree = "<group>";
+		};
+		FEEDFACE0000000000000007 /* SystemVersion.plist */ = {
+			isa = PBXGroup;
+			children = (
+				FEEDFACE0000000000000054 /* SystemVersion.plist */,
+			);
+			path = SystemVersion.plist;
+			sourceTree = "<group>";
+		};
+		FEEDFACE0000000000000009 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				FEEDFACE0000000000000061 /* CoreFoundation.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		FEEDFACE0000000000000091 /* sw_vers */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = FEEDFACE00000000000000A2 /* Build configuration list for PBXNativeTarget "sw_vers" */;
+			buildPhases = (
+				FEEDFACE0000000000000071 /* Sources */,
+				FEEDFACE0000000000000082 /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = sw_vers;
+			productName = sw_vers;
+			productReference = FEEDFACE0000000000000041 /* sw_vers */;
+			productType = "com.apple.product-type.tool";
+		};
+		FEEDFACE0000000000000092 /* startupfiletool */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = FEEDFACE00000000000000A3 /* Build configuration list for PBXNativeTarget "startupfiletool" */;
+			buildPhases = (
+				FEEDFACE0000000000000072 /* Sources */,
+				FEEDFACE0000000000000083 /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = startupfiletool;
+			productName = startupfiletool;
+			productReference = FEEDFACE0000000000000042 /* startupfiletool */;
+			productType = "com.apple.product-type.tool";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		FEEDFACE0000000000000001 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = YES;
+				LastUpgradeCheck = 1600;
+			};
+			buildConfigurationList = FEEDFACE00000000000000A1 /* Build configuration list for PBXProject "DarwinTools" */;
+			compatibilityVersion = "Xcode 14.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = FEEDFACE0000000000000002;
+			productRefGroup = FEEDFACE0000000000000003 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				FEEDFACE0000000000000091 /* sw_vers */,
+				FEEDFACE0000000000000092 /* startupfiletool */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXSourcesBuildPhase section */
+		FEEDFACE0000000000000071 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				FEEDFACE0000000000000021 /* sw_vers.c in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		FEEDFACE0000000000000072 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				FEEDFACE0000000000000022 /* startupfiletool.c in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		FEEDFACE00000000000000B1 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_WARN_64_TO_32_BIT_CONVERSION = YES;
+				CLANG_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				CLANG_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				CLANG_WARN_UNUSED_FUNCTION = YES;
+				CLANG_WARN_UNUSED_VARIABLE = YES;
+				CONFIGURATION_BUILD_DIR = "$(SRCROOT)/build/debug";
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 13.0;
+				OBJROOT = "$(SRCROOT)/build/obj/debug";
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+				SYMROOT = "$(SRCROOT)/build";
+			};
+			name = Debug;
+		};
+		FEEDFACE00000000000000B2 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_WARN_64_TO_32_BIT_CONVERSION = YES;
+				CLANG_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				CLANG_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				CLANG_WARN_UNUSED_FUNCTION = YES;
+				CLANG_WARN_UNUSED_VARIABLE = YES;
+				CONFIGURATION_BUILD_DIR = "$(SRCROOT)/build/release";
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				GCC_OPTIMIZATION_LEVEL = 2;
+				MACOSX_DEPLOYMENT_TARGET = 13.0;
+				OBJROOT = "$(SRCROOT)/build/obj/release";
+				SDKROOT = macosx;
+				SYMROOT = "$(SRCROOT)/build";
+			};
+			name = Release;
+		};
+		FEEDFACE00000000000000B3 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				EXECUTABLE_PREFIX = "";
+				LIBRARY_SEARCH_PATHS = "$(inherited) $(SRCROOT)/src/sw_vers";
+				OTHER_CFLAGS = (
+					"-Wall",
+					"-Wextra",
+					"-Wno-deprecated-declarations",
+				);
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		FEEDFACE00000000000000B4 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				EXECUTABLE_PREFIX = "";
+				LIBRARY_SEARCH_PATHS = "$(inherited) $(SRCROOT)/src/sw_vers";
+				OTHER_CFLAGS = (
+					"-Wall",
+					"-Wextra",
+					"-Wno-deprecated-declarations",
+				);
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+		FEEDFACE00000000000000B5 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				EXECUTABLE_PREFIX = "";
+				OTHER_CFLAGS = (
+					"-Wall",
+					"-Wextra",
+					"-Wno-deprecated-declarations",
+				);
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		FEEDFACE00000000000000B6 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				EXECUTABLE_PREFIX = "";
+				LIBRARY_SEARCH_PATHS = "$(inherited) $(SRCROOT)/src/sw_vers";
+				OTHER_CFLAGS = (
+					"-Wall",
+					"-Wextra",
+					"-Wno-deprecated-declarations",
+				);
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		FEEDFACE00000000000000A1 /* Build configuration list for PBXProject "DarwinTools" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				FEEDFACE00000000000000B1 /* Debug */,
+				FEEDFACE00000000000000B2 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		FEEDFACE00000000000000A2 /* Build configuration list for PBXNativeTarget "sw_vers" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				FEEDFACE00000000000000B3 /* Debug */,
+				FEEDFACE00000000000000B4 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		FEEDFACE00000000000000A3 /* Build configuration list for PBXNativeTarget "startupfiletool" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				FEEDFACE00000000000000B5 /* Debug */,
+				FEEDFACE00000000000000B6 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = FEEDFACE0000000000000001 /* Project object */;
+}
